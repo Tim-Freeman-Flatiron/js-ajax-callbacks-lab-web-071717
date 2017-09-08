@@ -16,7 +16,9 @@ function showCommits() {
 	let url = event.target.parentElement.getElementsByTagName("a")[0].innerHTML.split('/')
 	let user = url[3]
 	let repo = url[4].split(' ').join('+')
-	$.get(`https://api.github.com/repos/${user}/${repo}/commits?access_token=dc4a4e524037cb8035b964132abdb5cbf0bf914d`, function(data){executeCommits(data)})
+	$.get(`https://api.github.com/repos/${user}/${repo}/commits?access_token=dc4a4e524037cb8035b964132abdb5cbf0bf914d`, function(data){executeCommits(data)}).fail(function(error){
+		displayError()
+	})
 }
 
 function renderCommits(commits) {
